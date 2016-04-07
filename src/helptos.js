@@ -10,13 +10,13 @@ import fs from 'fs';
  * @param filePath
  * @returns {string}
  */
-export let buildLocalPath = filePath => path.join(__dirname, filePath);
+export let buildLocalPath = (filePath, dir) => path.join(dir, filePath);
 
 /**
  *
  * @param filePath
  */
-export let getJSON = filePath => fs.readFileSync(buildLocalPath(filePath), 'utf8');
+export let getJSON = (filePath, dir) => fs.readFileSync(buildLocalPath(filePath, dir), 'utf8');
 
 /**
  *
@@ -30,7 +30,7 @@ export let parseJSON = input => JSON.parse(input);
  * @param filePath
  * @returns {object}
  */
-export let getConfig = filePath => parseJSON(getJSON(filePath));
+export let getConfig = (filePath, dir) => parseJSON(getJSON(filePath, dir));
 
 /**
  * check if object has a specific property set (not undefined/null/false/empty string)
