@@ -165,7 +165,19 @@ export let shortenUrl = url => {
     });
 };
 
-export let copyArray = arr => JSON.parse(JSON.stringify(arr));
+/**
+ * deep copy of an object
+ *
+ * @param obj
+ */
+export let copyObject = obj => JSON.parse(JSON.stringify(obj));
+
+/**
+ * deep copy of an array
+ *
+ * @param obj
+ */
+export let copyArray = arr => copyObject(arr);
 
 /**
  * returns a new array sorted by a property value
