@@ -101,6 +101,14 @@ export let hasPropValue = (prop, value) => {
 export let hasNameValue = name => hasPropValue('name', name);
 
 /**
+ * checks if object has a specific value on property 'type'
+ *
+ * @param type
+ * @returns {Function}
+ */
+export let hasTypeValue = type => hasPropValue('type', type);
+
+/**
  * filter array for specific objects with specific name property
  *
  * @param arr
@@ -110,6 +118,15 @@ export let hasNameValue = name => hasPropValue('name', name);
 export let getByName = (arr, name) => arr.filter(hasNameValue(name));
 
 /**
+ * filter array for specific objects with specific type property
+ *
+ * @param arr
+ * @param type
+ * @returns {Array}
+ */
+export let getByType = (arr, type) => arr.filter(hasTypeValue(type));
+
+/**
  * get's first object with specific name property
  *
  * @param arr
@@ -117,6 +134,15 @@ export let getByName = (arr, name) => arr.filter(hasNameValue(name));
  * @returns {object}
  */
 export let getFirstByName = (arr, name) => getByName(arr, name)[0];
+
+/**
+ * get's first object with specific type property
+ *
+ * @param arr
+ * @param type
+ * @returns {object}
+ */
+export let getFirstByType = (arr, type) => getByType(arr, type)[0];
 
 /**
  * get comma separated string of name properties values from an array of objects
