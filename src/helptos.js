@@ -10,19 +10,19 @@ import fs from 'fs';
  * @param filePath
  * @returns {string}
  */
-export let buildLocalPath = (filePath, dir) => path.join(dir, filePath);
+export const buildLocalPath = (filePath, dir) => path.join(dir, filePath);
 
 /**
  *
  * @param filePath
  */
-export let getJSON = (filePath, dir) => fs.readFileSync(buildLocalPath(filePath, dir), 'utf8');
+export const getJSON = (filePath, dir) => fs.readFileSync(buildLocalPath(filePath, dir), 'utf8');
 
 /**
  *
  * @param input
  */
-export let parseJSON = input => JSON.parse(input);
+export const parseJSON = input => JSON.parse(input);
 
 /**
  * loads json config
@@ -30,7 +30,7 @@ export let parseJSON = input => JSON.parse(input);
  * @param filePath
  * @returns {object}
  */
-export let getConfig = (filePath, dir) => parseJSON(getJSON(filePath, dir));
+export const getConfig = (filePath, dir) => parseJSON(getJSON(filePath, dir));
 
 /**
  * check if object has a specific property set (not undefined/null/false/empty string)
@@ -38,7 +38,7 @@ export let getConfig = (filePath, dir) => parseJSON(getJSON(filePath, dir));
  * @param prop
  * @returns {function(): boolean}
  */
-export let hasPropSet = prop => {
+export const hasPropSet = prop => {
     return obj => !!obj && (!!obj[prop] || obj[prop] === 0 || obj[prop] === '');
 };
 
@@ -48,7 +48,7 @@ export let hasPropSet = prop => {
  * @param props
  * @returns {function(): boolean}
  */
-export let hasAllPropsSet = props => {
+export const hasAllPropsSet = props => {
 
     return obj => {
 
@@ -64,7 +64,7 @@ export let hasAllPropsSet = props => {
     };
 };
 
-export let anyHasPropSet = prop => {
+export const anyHasPropSet = prop => {
 
     return arr => {
 
@@ -87,7 +87,7 @@ export let anyHasPropSet = prop => {
  * @param value
  * @returns {Function}
  */
-export let hasPropValue = (prop, value) => {
+export const hasPropValue = (prop, value) => {
 
     return el => el[prop] === value;
 };
@@ -98,7 +98,7 @@ export let hasPropValue = (prop, value) => {
  * @param name
  * @returns {Function}
  */
-export let hasNameValue = name => hasPropValue('name', name);
+export const hasNameValue = name => hasPropValue('name', name);
 
 /**
  * checks if object has a specific value on property 'type'
@@ -106,7 +106,7 @@ export let hasNameValue = name => hasPropValue('name', name);
  * @param type
  * @returns {Function}
  */
-export let hasTypeValue = type => hasPropValue('type', type);
+export const hasTypeValue = type => hasPropValue('type', type);
 
 /**
  * filter array for specific objects with specific name property
@@ -115,7 +115,7 @@ export let hasTypeValue = type => hasPropValue('type', type);
  * @param name
  * @returns {Array}
  */
-export let getByName = (arr, name) => arr.filter(hasNameValue(name));
+export const getByName = (arr, name) => arr.filter(hasNameValue(name));
 
 /**
  * filter array for specific objects with specific type property
@@ -124,7 +124,7 @@ export let getByName = (arr, name) => arr.filter(hasNameValue(name));
  * @param type
  * @returns {Array}
  */
-export let getByType = (arr, type) => arr.filter(hasTypeValue(type));
+export const getByType = (arr, type) => arr.filter(hasTypeValue(type));
 
 /**
  * get's first object with specific name property
@@ -133,7 +133,7 @@ export let getByType = (arr, type) => arr.filter(hasTypeValue(type));
  * @param name
  * @returns {object}
  */
-export let getFirstByName = (arr, name) => getByName(arr, name)[0];
+export const getFirstByName = (arr, name) => getByName(arr, name)[0];
 
 /**
  * get's first object with specific type property
@@ -142,7 +142,7 @@ export let getFirstByName = (arr, name) => getByName(arr, name)[0];
  * @param type
  * @returns {object}
  */
-export let getFirstByType = (arr, type) => getByType(arr, type)[0];
+export const getFirstByType = (arr, type) => getByType(arr, type)[0];
 
 /**
  * get comma separated string of name properties values from an array of objects
@@ -150,7 +150,7 @@ export let getFirstByType = (arr, type) => getByType(arr, type)[0];
  * @param arr
  * @returns {string}
  */
-export let getNameList = arr => {
+export const getNameList = arr => {
     return arr.reduce((list, category) => {
 
         if (list.length) {
@@ -167,7 +167,7 @@ export let getNameList = arr => {
  * @param arr
  * @returns {*}
  */
-export let getRandomEntry = arr => arr[Math.floor(Math.random() * arr.length)];
+export const getRandomEntry = arr => arr[Math.floor(Math.random() * arr.length)];
 
 /**
  * shorten url
@@ -175,7 +175,7 @@ export let getRandomEntry = arr => arr[Math.floor(Math.random() * arr.length)];
  * @param url
  * @returns {Promise}
  */
-export let shortenUrl = url => {
+export const shortenUrl = url => {
 
     return new Promise(function (resolve, reject) {
 
@@ -196,14 +196,14 @@ export let shortenUrl = url => {
  *
  * @param obj
  */
-export let copyObject = obj => JSON.parse(JSON.stringify(obj));
+export const copyObject = obj => JSON.parse(JSON.stringify(obj));
 
 /**
  * deep copy of an array
  *
  * @param obj
  */
-export let copyArray = arr => copyObject(arr);
+export const copyArray = arr => copyObject(arr);
 
 /**
  * returns a new array sorted by a property value
@@ -212,7 +212,7 @@ export let copyArray = arr => copyObject(arr);
  * @param prop
  * @returns {Array}
  */
-export let sortByProp = (arr, prop) => {
+export const sortByProp = (arr, prop) => {
 
     let copy = copyArray(arr);
 
@@ -236,7 +236,7 @@ export let sortByProp = (arr, prop) => {
  * @param prop - e.g. '.user.purchases.average'
  * @returns {Array}
  */
-export let sortByDeepProp = (arr, prop) => {
+export const sortByDeepProp = (arr, prop) => {
 
     let copy = JSON.parse(JSON.stringify(arr)),
         deepProp = prop.split('.');
@@ -258,3 +258,11 @@ export let sortByDeepProp = (arr, prop) => {
         return 0;
     });
 };
+
+/**
+ * capitalize first letter of given string
+ *
+ * @param str
+ * @returns {string}
+ */
+export const capitalize = str => str[0].toUpperCase() + str.slice(1);
