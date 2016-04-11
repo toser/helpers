@@ -1,6 +1,6 @@
 {
   "name": "helptos",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "just a little collection of helper functions",
   "main": "lib/helptos.js",
   "scripts": {
